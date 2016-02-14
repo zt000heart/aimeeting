@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.meeting.zhangtao21.meetingmanagement.Bean.my;
 import com.meeting.zhangtao21.meetingmanagement.MeetingApplication;
 import com.meeting.zhangtao21.meetingmanagement.R;
 
@@ -16,16 +17,10 @@ import java.util.ArrayList;
  */
 public class MeetingBaseRcAdapter extends RecyclerView.Adapter<MeetingBaseRcAdapter.MyViewHolder>
 {
-    ArrayList<String> mDatas;
+    public ArrayList<my> mDatas;
 
     public MeetingBaseRcAdapter(){
-        mDatas=new ArrayList<String>();
-        mDatas.add("sss");
-        mDatas.add("sss");
-        mDatas.add("sss");
-        mDatas.add("sss");
-        mDatas.add("sss");
-        mDatas.add("sss");
+        mDatas = new ArrayList<my>();
     }
 
     @Override
@@ -40,10 +35,7 @@ public class MeetingBaseRcAdapter extends RecyclerView.Adapter<MeetingBaseRcAdap
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position)
     {
-        holder.tv.setText(mDatas.get(position));
-        if(position==2){
-            holder.tv.setText("qwqwqwqwqw");
-        }
+        holder.tv.setText(mDatas.get(position).getTitle());
     }
 
     @Override
@@ -54,9 +46,7 @@ public class MeetingBaseRcAdapter extends RecyclerView.Adapter<MeetingBaseRcAdap
 
     class MyViewHolder extends RecyclerView.ViewHolder
     {
-
         TextView tv;
-
         public MyViewHolder(View view)
         {
             super(view);

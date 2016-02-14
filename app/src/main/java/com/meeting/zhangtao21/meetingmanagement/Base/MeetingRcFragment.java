@@ -8,7 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.meeting.zhangtao21.meetingmanagement.Bean.Weather;
+import com.meeting.zhangtao21.meetingmanagement.Bean.my;
 import com.meeting.zhangtao21.meetingmanagement.R;
+import com.meeting.zhangtao21.meetingmanagement.Request.GsonArrayRequest;
+import com.meeting.zhangtao21.meetingmanagement.Request.GsonRequest;
+import com.meeting.zhangtao21.meetingmanagement.Util.LoggerUtil;
 import com.meeting.zhangtao21.meetingmanagement.adapter.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -16,27 +24,32 @@ import java.util.ArrayList;
 /**
  * Created by zhangtao21 on 15/12/15.
  */
-public abstract class MeetingRcFragment extends MeetingBaseFragment{
+public abstract class MeetingRcFragment<T> extends MeetingBaseFragment {
 
     public RecyclerView recyclerView;
+    private FrameLayout frameLayout;
+    protected RecyclerView.Adapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FrameLayout frameLayout= (FrameLayout) super.onCreateView(inflater, container, savedInstanceState);
-        recyclerView = (RecyclerView) inflater.inflate(R.layout.base_recycle,null,false);
-        initRcView(recyclerView);
-        frameLayout.addView(recyclerView);
+        frameLayout = (FrameLayout) super.onCreateView(inflater, container, savedInstanceState);
+        recyclerView = (RecyclerView) inflater.inflate(R.layout.base_recycle, frameLayout, false);
         return frameLayout;
+    }
+
+    @Override
+    public void response(Object object) {
+        super.response(object);
+        frameLayout.addView(recyclerView);
+        initRcView(recyclerView);
     }
 
     public void initRcView(RecyclerView recyclerView){
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        RecyclerView.Adapter adapter = createAdapter();
+        adapter = createAdapter();
         recyclerView.addItemDecoration(new DividerItemDecoration(context,DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setAdapter(adapter);
     }
-
-    public abstract ArrayList<Object> getData();
 
     public abstract RecyclerView.Adapter createAdapter();
 }

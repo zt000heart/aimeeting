@@ -22,12 +22,15 @@ import in.srain.cube.views.ptr.header.StoreHouseHeader;
 public abstract class MeetingPullRefreshFragment<T> extends MeetingBaseFragment{
 
     public PtrFrameLayout mPtrFrameLayout;
+    protected LinearLayout linearLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FrameLayout frameLayout= (FrameLayout) super.onCreateView(inflater, container, savedInstanceState);
         mPtrFrameLayout = genRefreshView(inflater);
-        LinearLayout linearLayout= (LinearLayout) mPtrFrameLayout.findViewById(R.id.store_house_ptr_image_content);
-        linearLayout.addView(createContent(inflater, linearLayout));
+        linearLayout = (LinearLayout) mPtrFrameLayout.findViewById(R.id.store_house_ptr_image_content);
+        if (createContent(inflater, linearLayout) != null) {
+            linearLayout.addView(createContent(inflater, linearLayout));
+        }
         frameLayout.addView(mPtrFrameLayout);
         return frameLayout;
     }
