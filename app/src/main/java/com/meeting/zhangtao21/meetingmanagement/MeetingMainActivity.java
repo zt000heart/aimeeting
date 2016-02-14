@@ -2,6 +2,7 @@ package com.meeting.zhangtao21.meetingmanagement;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,23 +10,25 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.meeting.zhangtao21.meetingmanagement.Base.MeetingBaseActivity;
-import com.meeting.zhangtao21.meetingmanagement.Fragment.FragmentPage1;
-import com.meeting.zhangtao21.meetingmanagement.Fragment.FragmentPage2;
-import com.meeting.zhangtao21.meetingmanagement.Fragment.FragmentPage3;
-import com.meeting.zhangtao21.meetingmanagement.Fragment.FragmentPage4;
+import com.meeting.zhangtao21.meetingmanagement.Fragment.FirstFragment;
+import com.meeting.zhangtao21.meetingmanagement.Fragment.MessageFragment;
+import com.meeting.zhangtao21.meetingmanagement.Fragment.TimerFragment;
+import com.meeting.zhangtao21.meetingmanagement.Fragment.MineFragment;
 
 public class MeetingMainActivity extends MeetingBaseActivity {
 
     private FragmentTabHost mTabHost;
     private LayoutInflater layoutInflater;
-    private Class fragmentArray[] = {FragmentPage1.class,FragmentPage2.class,FragmentPage3.class, FragmentPage4.class};
+    private Class fragmentArray[] = {FirstFragment.class, MessageFragment.class, TimerFragment.class, MineFragment.class};
 
-    private int mImageViewArray[] = {R.drawable.tab_favor_btn,R.drawable.tab_room_btn,R.drawable.tab_comment_btn,R.drawable.tab_mine_btn};
-    private String mTextviewArray[] = {"首页", "预定" , "消息" , "我的"};
+    private int mImageViewArray[] = {R.drawable.tab_favor_btn, R.drawable.tab_message_btn, R.drawable.tab_time_btn, R.drawable.tab_mine_btn};
+    private String mTextviewArray[] = {"首页", "消息", "预定", "我的"};
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.id_toolbar);
+        setSupportActionBar(toolbar);
         initView();
     }
 

@@ -60,9 +60,12 @@ public abstract class MeetingBaseFragment extends Fragment{
         }
     }
 
+    public abstract String createUri();
 
     public void response(Object object){
-        errorView.setVisibility(View.GONE);
+        if (errorView != null) {
+            errorView.setVisibility(View.GONE);
+        }
     }
 
     public void refresh(){

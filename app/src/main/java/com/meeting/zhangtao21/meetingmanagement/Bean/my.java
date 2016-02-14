@@ -32,7 +32,4 @@ public class my {
     public void setTitle(String title) {
         this.title = title;
     }
-
-
-
 }
