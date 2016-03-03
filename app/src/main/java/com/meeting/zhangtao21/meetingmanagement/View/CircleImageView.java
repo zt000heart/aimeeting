@@ -20,8 +20,6 @@ import android.widget.ImageView;
  * Created by Administrator on 2016/2/13 0013.
  */
 public class CircleImageView extends ImageView {
-    int width;
-    int heigh;
 
     public CircleImageView(Context context) {
         this(context, null);
@@ -41,7 +39,6 @@ public class CircleImageView extends ImageView {
         if (null == drawable) {
             return;
         }
-        // ½«drawable×ª»»³Ébitmap
         Bitmap bitmap = Bitmap
                 .createBitmap(
                         drawable.getIntrinsicWidth(),
@@ -62,7 +59,6 @@ public class CircleImageView extends ImageView {
         borderPaint.setColor(Color.GREEN);
 
         canvas.drawCircle(cx, cy, radius, borderPaint);
-        // »­Í¼
         BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP,
                 Shader.TileMode.CLAMP);
         Paint paint = new Paint();
