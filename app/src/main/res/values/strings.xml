@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">移动会议管理</string>
+    <string name="ppt_download">移动会议PPT下载</string>
     <string name="setting">编辑资料</string>
+    <string name="test1">2016移动会议管理</string>
+    <string name="test2">2016会议管理.ppt</string>
+    <string name="test3">2016-3-10</string>
+    <string name="test4">2016-2-14</string>
+    <string name="test5">作者：zhangtao</string>
+    <string name="new_message">最新消息</string>
+    <string name="ppt_see">ppt查看</string>
 </resources>

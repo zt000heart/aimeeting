@@ -7,6 +7,21 @@ public class User {
     String name;
     String password;
     String nick;
+    int icon;
+
+    public User(String name, String password, String nick, int icon) {
+        this.name = name;
+        this.password = password;
+        this.nick = nick;
+    }
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
+    }
 
     public void setName(String name) {
         this.name = name;

@@ -21,6 +21,9 @@ public class MeetingBaseRcAdapter extends RecyclerView.Adapter<MeetingBaseRcAdap
 
     public MeetingBaseRcAdapter(){
         mDatas = new ArrayList<my>();
+        for (int i = 0; i < 100; i++) {
+            mDatas.add(new my(10, 1, "ssssss"));
+        }
     }
 
     @Override

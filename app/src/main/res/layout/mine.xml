@@ -6,12 +6,13 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorAccent">
+        android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/user_info"
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="130dp"
+            android:background="@color/hex_149df0">
 
             <com.meeting.zhangtao21.meetingmanagement.View.CircleImageView
                 android:id="@+id/icon"
@@ -57,6 +58,120 @@
                 android:id="@+id/edit"
                 android:text="@string/setting" />
         </RelativeLayout>
+
+        <include layout="@layout/gray_divider" />
+
+
+        <LinearLayout
+            android:id="@+id/my_order"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:text="我的预定" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="45dp"
+                android:src="@drawable/right"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right" />
+        </LinearLayout>
+
+        <include layout="@layout/gray_divider" />
+
+        <LinearLayout
+            android:id="@+id/my_message"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:text="我的消息" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="45dp"
+                android:src="@drawable/right"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right" />
+        </LinearLayout>
+
+        <include layout="@layout/gray_divider" />
+
+        <LinearLayout
+            android:id="@+id/send_message"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:gravity="left|center_vertical"
+                android:text="发布消息" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="45dp"
+                android:src="@drawable/right"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right" />
+        </LinearLayout>
+
+        <include layout="@layout/gray_divider" />
+
+        <LinearLayout
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:gravity="left|center_vertical"
+                android:text="关于" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="45dp"
+                android:src="@drawable/right"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right" />
+        </LinearLayout>
+
+        <include layout="@layout/gray_divider" />
+
+        <TextView
+            android:id="@+id/logoff"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="退出登录"
+            android:textSize="16sp"
+            android:background="@color/hex_149df0" />
+
+        <include layout="@layout/gray_divider" />
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

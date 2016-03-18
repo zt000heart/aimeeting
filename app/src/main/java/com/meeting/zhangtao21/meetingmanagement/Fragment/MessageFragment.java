@@ -9,27 +9,23 @@ import android.view.ViewGroup;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.meeting.zhangtao21.meetingmanagement.Base.MeetingPullRefreshRcFragment;
 import com.meeting.zhangtao21.meetingmanagement.Base.MeetingRcFragment;
+import com.meeting.zhangtao21.meetingmanagement.Bean.Message;
+import com.meeting.zhangtao21.meetingmanagement.Bean.PPT;
 import com.meeting.zhangtao21.meetingmanagement.Bean.my;
 import com.meeting.zhangtao21.meetingmanagement.Request.GsonArrayRequest;
 import com.meeting.zhangtao21.meetingmanagement.Util.LoggerUtil;
 import com.meeting.zhangtao21.meetingmanagement.adapter.MeetingBaseRcAdapter;
+import com.meeting.zhangtao21.meetingmanagement.adapter.MessageListAdapter;
+import com.meeting.zhangtao21.meetingmanagement.adapter.PPTListAdapter;
 
 import java.util.ArrayList;
 
 /**
  * Created by zhangtao21 on 15/10/22.
  */
-public class MessageFragment extends MeetingRcFragment {
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    public String createUri() {
-        return "http://api.maoyan.com/mmdb/movie/78702/celebrityTitles.json?utm_campaign=AmovieBmovieC110189035496448D100&movieBundleVersion=6400&utm_source=jenkins&utm_medium=android&utm_term=6.4.0&utm_content=000000000000000&ci=1&net=255&dModel=Google%20Nexus%205%20-%205.0.0%20-%20API%2021%20-%201080x1920&uuid=2C2C0ECD557F366849954BEF88D0017A831AF449F8E59AE4159CB14884CB181C&lat=0.0&lng=0.0";
-    }
+public class MessageFragment extends MeetingPullRefreshRcFragment {
 
     @Override
     public Request createRequest() {
@@ -47,20 +43,26 @@ public class MessageFragment extends MeetingRcFragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                error(volleyError);
+//                error(volleyError);
             }
         });
         return gsonArrayRequest;
     }
 
     @Override
+    public String createUri() {
+        return "http://api.maoyan.com/mmdb/movie/78702/celebrityTitles.json?utm_campaign=AmovieBmovieC110189035496448D100&movieBundleVersion=6400&utm_source=jenkins&utm_medium=android&utm_term=6.4.0&utm_content=000000000000000&ci=1&net=255&dModel=Google%20Nexus%205%20-%205.0.0%20-%20API%2021%20-%201080x1920&uuid=2C2C0ECD557F366849954BEF88D0017A831AF449F8E59AE4159CB14884CB181C&lat=0.0&lng=0.0";
+    }
+
+    @Override
     public RecyclerView.Adapter createAdapter() {
-        return new MeetingBaseRcAdapter();
+        return new MessageListAdapter();
     }
 
     @Override
     public void response(Object object) {
         super.response(object);
-        ((MeetingBaseRcAdapter) adapter).mDatas = (ArrayList<my>) object;
+        ((MessageListAdapter) adapter).mDatas = (ArrayList<Message>) object;
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }

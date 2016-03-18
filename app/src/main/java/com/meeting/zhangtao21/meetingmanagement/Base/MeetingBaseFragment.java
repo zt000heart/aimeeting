@@ -3,6 +3,7 @@ package com.meeting.zhangtao21.meetingmanagement.Base;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.meeting.zhangtao21.meetingmanagement.MeetingApplication;
 import com.meeting.zhangtao21.meetingmanagement.R;
+import com.meeting.zhangtao21.meetingmanagement.Util.LoggerUtil;
+import com.meeting.zhangtao21.meetingmanagement.Util.MessageUtil;
 
 /**
  * Created by zhangtao21 on 15/12/9.
@@ -40,7 +43,7 @@ public abstract class MeetingBaseFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        baseFrameLayout = (FrameLayout) inflater.inflate(R.layout.base_framelayout_empty,null,false);
+        baseFrameLayout = (FrameLayout) inflater.inflate(R.layout.base_framelayout_empty, container, false);
         errorView = getEmptyView();
         errorView.setVisibility(View.GONE);
         baseFrameLayout.addView(errorView);
@@ -54,7 +57,7 @@ public abstract class MeetingBaseFragment extends Fragment{
     }
 
     public void error(VolleyError volleyError){
-        Toast.makeText(MeetingApplication.getContext(),"网络错误，请检查后重试",Toast.LENGTH_SHORT).show();
+        MessageUtil.showSnackBar(baseFrameLayout, "网络连接失败，请重试");
         if(errorView!=null){
             errorView.setVisibility(View.VISIBLE);
         }
@@ -89,6 +92,7 @@ public abstract class MeetingBaseFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 refresh();
+                LoggerUtil.LogE("eeee");
             }
         });
         return view;

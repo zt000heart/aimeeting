@@ -19,8 +19,8 @@ public class MeetingBaseActivity extends AppCompatActivity {
     RequestQueue requestQueue;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         requestQueue = Volley.newRequestQueue(this);
     }
 }

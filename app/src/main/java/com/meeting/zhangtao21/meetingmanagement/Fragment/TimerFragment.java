@@ -1,21 +1,28 @@
 package com.meeting.zhangtao21.meetingmanagement.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.meeting.zhangtao21.meetingmanagement.Activity.MeetingAddActivity;
 import com.meeting.zhangtao21.meetingmanagement.Base.MeetingBaseFragment;
 import com.meeting.zhangtao21.meetingmanagement.Base.MeetingPullRefreshRcFragment;
+import com.meeting.zhangtao21.meetingmanagement.Bean.Message;
 import com.meeting.zhangtao21.meetingmanagement.Bean.my;
+import com.meeting.zhangtao21.meetingmanagement.MeetingApplication;
 import com.meeting.zhangtao21.meetingmanagement.R;
 import com.meeting.zhangtao21.meetingmanagement.Request.GsonArrayRequest;
 import com.meeting.zhangtao21.meetingmanagement.Util.LoggerUtil;
 import com.meeting.zhangtao21.meetingmanagement.adapter.MeetingBaseRcAdapter;
+import com.meeting.zhangtao21.meetingmanagement.adapter.TimerListAdapter;
 
 import java.util.ArrayList;
 
@@ -23,6 +30,21 @@ import java.util.ArrayList;
  * Created by zhangtao21 on 15/10/22.
  */
 public class TimerFragment extends MeetingPullRefreshRcFragment {
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        FrameLayout frameLayout = (FrameLayout) super.onCreateView(inflater, container, savedInstanceState);
+        FloatingActionButton floatingActionButton = (FloatingActionButton) inflater.inflate(R.layout.fab, frameLayout, false);
+        frameLayout.addView(floatingActionButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MeetingApplication.getContext(), MeetingAddActivity.class);
+                startActivity(intent);
+            }
+        });
+        return frameLayout;
+    }
 
     @Override
     public Request createRequest() {
@@ -40,7 +62,7 @@ public class TimerFragment extends MeetingPullRefreshRcFragment {
         },new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                error(volleyError);
+//                error(volleyError);
             }
         } );
         return gsonArrayRequest;
@@ -53,12 +75,13 @@ public class TimerFragment extends MeetingPullRefreshRcFragment {
 
     @Override
     public RecyclerView.Adapter createAdapter() {
-        return new MeetingBaseRcAdapter();
+        return new TimerListAdapter();
     }
 
     @Override
     public void response(Object object) {
         super.response(object);
-        ((MeetingBaseRcAdapter) adapter).mDatas = (ArrayList<my>) object;
+        ((TimerListAdapter) adapter).mDatas = (ArrayList<Message>) object;
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }

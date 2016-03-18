@@ -38,6 +38,11 @@ public abstract class MeetingRcFragment<T> extends MeetingBaseFragment {
     }
 
     @Override
+    public void refresh() {
+        doLoadData();
+    }
+
+    @Override
     public void response(Object object) {
         super.response(object);
         frameLayout.addView(recyclerView);
@@ -45,7 +50,9 @@ public abstract class MeetingRcFragment<T> extends MeetingBaseFragment {
     }
 
     public void initRcView(RecyclerView recyclerView){
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
         adapter = createAdapter();
         recyclerView.addItemDecoration(new DividerItemDecoration(context,DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setAdapter(adapter);

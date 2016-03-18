@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.android.volley.VolleyError;
 import com.meeting.zhangtao21.meetingmanagement.MeetingApplication;
 import com.meeting.zhangtao21.meetingmanagement.R;
 
+import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
@@ -22,21 +24,21 @@ import in.srain.cube.views.ptr.header.StoreHouseHeader;
 public abstract class MeetingPullRefreshFragment<T> extends MeetingBaseFragment{
 
     public PtrFrameLayout mPtrFrameLayout;
-    protected LinearLayout linearLayout;
+    protected ScrollView scrollView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FrameLayout frameLayout= (FrameLayout) super.onCreateView(inflater, container, savedInstanceState);
-        mPtrFrameLayout = genRefreshView(inflater);
-        linearLayout = (LinearLayout) mPtrFrameLayout.findViewById(R.id.store_house_ptr_image_content);
-        if (createContent(inflater, linearLayout) != null) {
-            linearLayout.addView(createContent(inflater, linearLayout));
+        mPtrFrameLayout = genRefreshView(inflater, container);
+        scrollView = (ScrollView) mPtrFrameLayout.findViewById(R.id.store_house_ptr_image_content);
+        if (createContent(inflater, scrollView) != null) {
+            scrollView.addView(createContent(inflater, scrollView));
         }
         frameLayout.addView(mPtrFrameLayout);
         return frameLayout;
     }
 
-    private PtrFrameLayout genRefreshView(LayoutInflater inflater){
-        mPtrFrameLayout= (PtrFrameLayout) inflater.inflate(R.layout.base_pull, null, false);
+    private PtrFrameLayout genRefreshView(LayoutInflater inflater, ViewGroup container) {
+        mPtrFrameLayout = (PtrFrameLayout) inflater.inflate(R.layout.base_pull, container, false);
         final StoreHouseHeader header = new StoreHouseHeader(MeetingApplication.getContext());
         header.setPadding(0, 20, 0, 0);
         header.initWithString("Loading");
@@ -46,12 +48,16 @@ public abstract class MeetingPullRefreshFragment<T> extends MeetingBaseFragment{
         mPtrFrameLayout.setPtrHandler(new PtrHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-                doLoadData();
+                if (createRequest() != null) {
+                    doLoadData();
+                } else {
+                    mPtrFrameLayout.refreshComplete();
+                }
             }
 
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return true;
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
             }
         });
         return mPtrFrameLayout;
@@ -70,6 +76,7 @@ public abstract class MeetingPullRefreshFragment<T> extends MeetingBaseFragment{
     public void error(VolleyError volleyError) {
         super.error(volleyError);
         mPtrFrameLayout.setVisibility(View.GONE);
+        mPtrFrameLayout.refreshComplete();
     }
 
     @Override
