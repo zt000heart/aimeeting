@@ -56,7 +56,8 @@ public class MyMessageFragment extends MeetingPullRefreshRcFragment {
 //                error(volleyError);
             }
         });
-        return gsonArrayRequest;
+//        return gsonArrayRequest;
+        return null;
     }
 
     @Override

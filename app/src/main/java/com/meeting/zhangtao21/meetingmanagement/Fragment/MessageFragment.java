@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.meeting.zhangtao21.meetingmanagement.Base.MeetingBaseFragment;
 import com.meeting.zhangtao21.meetingmanagement.Base.MeetingPullRefreshRcFragment;
 import com.meeting.zhangtao21.meetingmanagement.Base.MeetingRcFragment;
 import com.meeting.zhangtao21.meetingmanagement.Bean.Message;
@@ -26,6 +27,12 @@ import java.util.ArrayList;
  * Created by zhangtao21 on 15/10/22.
  */
 public class MessageFragment extends MeetingPullRefreshRcFragment {
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((MessageListAdapter) adapter).setBindFragment(this);
+    }
 
     @Override
     public Request createRequest() {
@@ -46,7 +53,8 @@ public class MessageFragment extends MeetingPullRefreshRcFragment {
 //                error(volleyError);
             }
         });
-        return gsonArrayRequest;
+//        return gsonArrayRequest;
+        return null;
     }
 
     @Override

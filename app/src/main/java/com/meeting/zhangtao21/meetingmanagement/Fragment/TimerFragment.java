@@ -15,12 +15,14 @@ import com.android.volley.VolleyError;
 import com.meeting.zhangtao21.meetingmanagement.Activity.MeetingAddActivity;
 import com.meeting.zhangtao21.meetingmanagement.Base.MeetingBaseFragment;
 import com.meeting.zhangtao21.meetingmanagement.Base.MeetingPullRefreshRcFragment;
+import com.meeting.zhangtao21.meetingmanagement.Bean.Meeting;
 import com.meeting.zhangtao21.meetingmanagement.Bean.Message;
 import com.meeting.zhangtao21.meetingmanagement.Bean.my;
 import com.meeting.zhangtao21.meetingmanagement.MeetingApplication;
 import com.meeting.zhangtao21.meetingmanagement.R;
 import com.meeting.zhangtao21.meetingmanagement.Request.GsonArrayRequest;
 import com.meeting.zhangtao21.meetingmanagement.Util.LoggerUtil;
+import com.meeting.zhangtao21.meetingmanagement.adapter.DividerItemDecoration;
 import com.meeting.zhangtao21.meetingmanagement.adapter.MeetingBaseRcAdapter;
 import com.meeting.zhangtao21.meetingmanagement.adapter.TimerListAdapter;
 
@@ -43,6 +45,8 @@ public class TimerFragment extends MeetingPullRefreshRcFragment {
                 startActivity(intent);
             }
         });
+        recyclerView.addItemDecoration(new DividerItemDecoration(
+                getActivity(), DividerItemDecoration.VERTICAL_LIST));
         return frameLayout;
     }
 
@@ -65,7 +69,8 @@ public class TimerFragment extends MeetingPullRefreshRcFragment {
 //                error(volleyError);
             }
         } );
-        return gsonArrayRequest;
+//        return gsonArrayRequest;
+        return null;
     }
 
     @Override
@@ -81,7 +86,7 @@ public class TimerFragment extends MeetingPullRefreshRcFragment {
     @Override
     public void response(Object object) {
         super.response(object);
-        ((TimerListAdapter) adapter).mDatas = (ArrayList<Message>) object;
+        ((TimerListAdapter) adapter).mDatas = (ArrayList<Meeting>) object;
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 }

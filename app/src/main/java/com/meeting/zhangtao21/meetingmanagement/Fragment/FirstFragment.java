@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.meeting.zhangtao21.meetingmanagement.Activity.MessageDetailActivity;
 import com.meeting.zhangtao21.meetingmanagement.Activity.PPTListActivity;
+import com.meeting.zhangtao21.meetingmanagement.Base.MeetingBaseFragment;
 import com.meeting.zhangtao21.meetingmanagement.Base.MeetingPullRefreshFragment;
 import com.meeting.zhangtao21.meetingmanagement.Bean.Message;
 import com.meeting.zhangtao21.meetingmanagement.Bean.User;
@@ -76,7 +78,7 @@ public class FirstFragment extends MeetingPullRefreshFragment implements View.On
         }
         LayoutInflater layoutInflater = LayoutInflater.from(MeetingApplication.getContext());
         for (int j = 0; j < messages.size(); j++) {
-            Message message = messages.get(j);
+            final Message message = messages.get(j);
             LinearLayout linearLayout = (LinearLayout) layoutInflater.inflate(R.layout.message_item, messageContent, false);
             TextView title = (TextView) linearLayout.findViewById(R.id.title);
             TextView des = (TextView) linearLayout.findViewById(R.id.descibtion);
@@ -86,6 +88,18 @@ public class FirstFragment extends MeetingPullRefreshFragment implements View.On
             des.setText(message.getDescribtion());
             time.setText(message.getTime());
             author.setText(message.getAuthor());
+            linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(MeetingApplication.getContext(), MessageDetailActivity.class);
+                    intent.putExtra("title", message.getTitle());
+                    intent.putExtra("des", message.getDescribtion());
+                    intent.putExtra("author", message.getAuthor());
+                    intent.putExtra("time", message.getTime());
+                    startActivity(intent);
+                }
+            });
             messageContent.addView(linearLayout);
             if (j < messages.size() - 1) {
                 messageContent.addView(layoutInflater.inflate(R.layout.gray_line, messageContent, false));

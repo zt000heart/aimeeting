@@ -26,14 +26,14 @@ public class SendMessageFragment extends MeetingBaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.meeting_add, container, false);
+        View view = inflater.inflate(R.layout.message_add, container, false);
         textInputLayout = (TextInputLayout) view.findViewById(R.id.til);
         toolbar = (Toolbar) view.findViewById(R.id.id_toolbar);
 
         ((MeetingBaseActivity) getActivity()).setSupportActionBar(toolbar);
 
         editText = (EditText) view.findViewById(R.id.edt);
-        textInputLayout.setHint("password");
+        textInputLayout.setHint("标题");
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

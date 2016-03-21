@@ -1,11 +1,16 @@
 package com.meeting.zhangtao21.meetingmanagement.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.meeting.zhangtao21.meetingmanagement.Activity.AboutActivity;
+import com.meeting.zhangtao21.meetingmanagement.Activity.MessageDetailActivity;
+import com.meeting.zhangtao21.meetingmanagement.Base.MeetingBaseFragment;
 import com.meeting.zhangtao21.meetingmanagement.Bean.Message;
 import com.meeting.zhangtao21.meetingmanagement.Bean.my;
 import com.meeting.zhangtao21.meetingmanagement.MeetingApplication;
@@ -18,6 +23,12 @@ import java.util.ArrayList;
  */
 public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.MyViewHolder> {
     public ArrayList<Message> mDatas;
+
+    MeetingBaseFragment bindFragment;
+
+    public void setBindFragment(MeetingBaseFragment meetingBaseFragment) {
+        bindFragment = meetingBaseFragment;
+    }
 
     public MessageListAdapter() {
         mDatas = new ArrayList<Message>();
@@ -36,11 +47,25 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Message message = mDatas.get(position);
+        final Message message = mDatas.get(position);
         holder.title.setText(message.getTitle());
         holder.des.setText(message.getDescribtion());
-        holder.time.setText(message.getTime());
-        holder.author.setText(message.getAuthor());
+        holder.time.setText("发布时间：" + message.getTime());
+        holder.author.setText("作者：" + message.getAuthor());
+        holder.content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("title", message.getTitle());
+                intent.putExtra("des", message.getDescribtion());
+                intent.putExtra("author", message.getAuthor());
+                intent.putExtra("time", message.getTime());
+                intent.setClass(MeetingApplication.getContext(), MessageDetailActivity.class);
+                if (bindFragment != null) {
+                    bindFragment.startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
@@ -53,6 +78,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         TextView des;
         TextView time;
         TextView author;
+        LinearLayout content;
 
         public MyViewHolder(View view) {
             super(view);
@@ -60,6 +86,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             des = (TextView) view.findViewById(R.id.descibtion);
             time = (TextView) view.findViewById(R.id.time);
             author = (TextView) view.findViewById(R.id.author);
+            content = (LinearLayout) view.findViewById(R.id.content);
         }
     }
 }

@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginLeft="7dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/id_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:fitsSystemWindows="true"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <TextView
         android:id="@+id/title"
@@ -14,9 +21,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textColor="@color/hex_cc000000"
-        android:singleLine="true"
-        android:text="title"
-        android:ellipsize="end" />
+        android:text="title" />
 
     <TextView
         android:id="@+id/descibtion"
@@ -25,9 +30,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/hex_8c000000"
         android:text="desssdqwdqdwwq"
-        android:maxLines="3"
-        android:textSize="15sp"
-        android:ellipsize="end" />
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_marginTop="7dp"

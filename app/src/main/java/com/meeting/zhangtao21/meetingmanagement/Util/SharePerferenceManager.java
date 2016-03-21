@@ -27,7 +27,7 @@ public class SharePerferenceManager {
         String uPassword = sharedPreferences.getString("password", "");
         String uNick = sharedPreferences.getString("nick", "");
         int uIcon = sharedPreferences.getInt("icon", 0);
-        return new User(uName, uPassword, uNick, uIcon);
+        return new User(uName, uPassword, uNick, uIcon, 0);
     }
 
     public static void spUserDelate(Context context, String name) {

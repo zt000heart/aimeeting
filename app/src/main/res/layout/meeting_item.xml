@@ -9,51 +9,53 @@
     <TextView
         android:id="@+id/title"
         android:layout_marginTop="8dp"
-        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textColor="@color/hex_cc000000"
         android:singleLine="true"
         android:text="title"
+        android:layout_marginLeft="10dp"
         android:ellipsize="end" />
 
     <TextView
         android:id="@+id/descibtion"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="3dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/hex_8c000000"
         android:text="desssdqwdqdwwq"
-        android:maxLines="3"
+        android:singleLine="true"
         android:textSize="15sp"
+        android:layout_marginLeft="10dp"
         android:ellipsize="end" />
 
-    <LinearLayout
-        android:layout_marginTop="7dp"
+    <TextView
+        android:id="@+id/time"
+        android:layout_marginTop="3dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="right">
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:text="time" />
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:text="time" />
+    <TextView
+        android:id="@+id/longtime"
+        android:layout_marginTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:text="longtime" />
 
-        <TextView
-            android:id="@+id/author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:text="author"
-            android:maxLines="3"
-            android:textSize="15sp"
-            android:layout_marginBottom="4dp" />
-
-    </LinearLayout>
-
+    <TextView
+        android:id="@+id/author"
+        android:layout_marginTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="8dp"
+        android:text="author"
+        android:maxLines="3"
+        android:textSize="15sp" />
 </LinearLayout>

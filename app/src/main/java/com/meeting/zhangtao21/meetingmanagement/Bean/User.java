@@ -8,11 +8,21 @@ public class User {
     String password;
     String nick;
     int icon;
+    int type;
 
-    public User(String name, String password, String nick, int icon) {
+    public User(String name, String password, String nick, int icon, int type) {
         this.name = name;
         this.password = password;
         this.nick = nick;
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getIcon() {
